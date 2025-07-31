@@ -29,7 +29,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: System :: Systems Administration",
-    "Topic :: Internet :: WWW/HTTP :: Servers",
+    "Topic :: Internet",
 ]
 dependencies = [
     "fastmcp>=2.10.5",

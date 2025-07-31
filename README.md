@@ -510,7 +510,7 @@ Add the following configuration to your Claude Desktop MCP settings file:
       "args": [
         "google-cloud-mcp",
         "--project-id", "your-project-id",
-        "----service-account-path", "/path/to/your/service-account-key.json"
+        "--service-account-path", "/path/to/your/service-account-key.json"
         "--allowed-buckets", "bucket1,bucket2,bucket3",
         "--allowed-datasets", "dataset1,dataset2",
         "--allowed-log-buckets", "log-bucket1",

@@ -13,9 +13,9 @@ A comprehensive Model Context Protocol (MCP) server for Google Cloud Platform se
 
 ## 📦 Installation
 
-### From PyPI
+### From uv tool
 ```bash
-pip install google-cloud-mcp
+uv tool install google-cloud-mcp
 ```
 
 ### From Source
@@ -41,12 +41,12 @@ gcloud auth application-default login
 
 ### Running the MCP Server
 ```bash
-python main.py
+uv run main.py
 ```
 
 ## 🛠️ Available Tools
-
-### BigQuery Tools
+<details>
+<summary>BigQuery Tools</summary>
 
 #### `google-cloud-bigquery_execute_query`
 Execute SQL queries with optional cost estimation.
@@ -121,8 +121,10 @@ Get the status of a BigQuery job.
   "job_id": "job_12345"
 }
 ```
+</details>
 
-### Cloud Logging Tools
+<details>
+<summary>Cloud Logging Tools</summary>
 
 #### `google-cloud-logging_write_log`
 Write log entries (text or structured).
@@ -264,8 +266,10 @@ Create a sink to export logs to BigQuery.
   "dataset_id": "log_analysis"
 }
 ```
+</details>
 
-### Cloud Storage Tools
+<details>
+<summary>>Cloud Storage Tools</summary>
 
 #### `google-cloud-storage_create_bucket`
 Create a new Cloud Storage bucket.
@@ -411,8 +415,10 @@ Search for files using patterns.
   "size_range": {"min_bytes": 1024, "max_bytes": 1048576}
 }
 ```
+</details>
 
-### Compute Engine Tools
+<details>
+<summary>Compute Engine Tools</summary>
 
 #### `google-cloud-compute_create_instance`
 Create a new VM instance.
@@ -490,66 +496,26 @@ Get the status of a Compute Engine operation.
   "zone": "us-central1-a"
 }
 ```
+</details>
 
 ## 🖥️ Claude Desktop Configuration
 
 Add the following configuration to your Claude Desktop MCP settings file:
 
-### Option 1: Using PyPI Package (Recommended)
 ```json
 {
   "mcpServers": {
     "google-cloud-mcp": {
-      "command": "uv",
+      "command": "uvx",
       "args": [
-        "tool", "run", "google-cloud-mcp"
-      ],
-      "env": {
-        "GOOGLE_CLOUD_PROJECT": "your-project-id",
-        "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/your/service-account-key.json"
-      }
-    }
-  }
-}
-```
-
-### Option 2: From Source
-```json
-{
-  "mcpServers": {
-    "google-cloud-mcp": {
-      "command": "python",
-      "args": [
-        "-m", "src.server"
-      ],
-      "cwd": "/path/to/google-cloud-mcp",
-      "env": {
-        "GOOGLE_CLOUD_PROJECT": "your-project-id",
-        "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/your/service-account-key.json"
-      }
-    }
-  }
-}
-```
-
-### Option 3: With Access Controls
-```json
-{
-  "mcpServers": {
-    "google-cloud-mcp": {
-      "command": "python",
-      "args": [
-        "-m", "src.server",
+        "google-cloud-mcp",
         "--project-id", "your-project-id",
+        "----service-account-path", "/path/to/your/service-account-key.json"
         "--allowed-buckets", "bucket1,bucket2,bucket3",
         "--allowed-datasets", "dataset1,dataset2",
         "--allowed-log-buckets", "log-bucket1",
         "--allowed-instances", "vm1,vm2"
       ],
-      "cwd": "/path/to/google-cloud-mcp",
-      "env": {
-        "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/your/service-account-key.json"
-      }
     }
   }
 }
@@ -560,13 +526,6 @@ Add the following configuration to your Claude Desktop MCP settings file:
 1. **Project ID**: Replace `your-project-id` with your actual Google Cloud Project ID
 2. **Service Account**: Replace `/path/to/your/service-account-key.json` with the path to your service account JSON file
 3. **Access Controls**: Specify comma-separated lists of allowed resources to restrict access
-4. **Working Directory**: Replace `/path/to/google-cloud-mcp` with the actual path to your cloned repository
-
-### Environment Variables:
-
-You can also use environment variables instead of command line arguments:
-- `GOOGLE_CLOUD_PROJECT`: Your Google Cloud Project ID
-- `GOOGLE_APPLICATION_CREDENTIALS`: Path to service account JSON file
 
 ## 🏗️ Architecture
 
@@ -587,7 +546,7 @@ Each manager class follows a consistent pattern:
 
 Run the test server:
 ```bash
-python test_server.py
+uv run test_server.py
 ```
 
 This will test all available MCP tools and verify their functionality.
